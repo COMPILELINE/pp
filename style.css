@@ -115,7 +115,7 @@ nav button.active,
     height: 30px;
     background-color: var(--color-two);
     border-radius: 5px ;
-    background: var(--color-two) url(./asstes/download-minimalistic-svgrepo-com.svg) no-repeat center/18px;
+    background: var(--color-two) url(./assets/download-minimalistic-svgrepo-com.svg) no-repeat center/18px;
 }
 
 .container header a:hover{
