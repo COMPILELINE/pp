@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./main.js"></script>
+    <title>practical_programs</title>
+</head>
+
+<body>
+    <main class="java">
+        <div class="container">
+            <header>
+                <h1>Java Prog.. 1 - 14</h1> <a href="./asstes/java_practical.pdf" download title="download pdf"></a>
+            </header>
+            <div class="prog ">
+                <p>1. Write a java application to implement interfaces.</p>
+                <pre>
+interface A {
+        void display();
+}
+
+public class Main implements A {
+    int x = 10;
+    public void display(){
+        System.out.println("I am in interface");
+    }
+
+    public void show(){
+        System.out.println("x = " + x);
+    }
+
+    public static void main(String[] args) {
+        Main obj1 = new Main();
+        obj1.display();
+        obj1.show();
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>2. Write a java application to implement abstract class.</p>
+                <pre>abstract class A{
+    abstract void display();
+}
+
+public class Main extends A{
+
+    int x = 10;
+
+    public void display(){
+        System.out.println("I am in abstract class");
+    }
+
+    public void show(){
+        System.out.println("x = " + x);
+    }
+
+    public static void main(String[] args) {
+        Main obj1 = new Main();
+        obj1.display();
+        obj1.show();
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>3. Write a java application to implement final class.</p>
+                <pre>final class A{
+    void display(){
+        System.out.println("I am in final class");
+    }
+}
+public class Main{
+
+    public void show(){
+        System.out.println("I am in show method");
+    }
+
+    public static void main(String[] args) {
+        A obj_a = new A();
+        Main obj_m = new Main();
+        obj_a.display();
+        obj_m.show();
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>4. Write a java application to implement multithreading.</p>
+                <pre>class newThread extends Thread{
+    public newThread(String n){
+        super(n);
+        start();
+    }
+
+    public void run(){
+        for(int i = 1; i &lt;= 5; i++){
+            System.out.println(getName() + "=" + i);
+            try {
+                Thread.sleep(500);
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        newThread n1 = new newThread("one");
+        newThread n2 = new newThread("two");
+        newThread n3 = new newThread("three");
+        for(int i=1; i &lt;= 5; i++){
+            System.out.println("Main = " + i);
+            try {
+                Thread.sleep(500);
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>5. Write a java application to implement exception handling.</p>
+                <pre>public class Main {
+    public static void main(String[] args) {
+        int a = 10 , b = 0 , c;
+        try {
+            c = a/b;
+            System.out.println("c = " + c);
+        } catch (Exception e){
+            System.out.println(e);
+        } finally {
+            System.out.println("I am in finally block");
+        }
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>6. write a java application single level inheritance.</p>
+                <pre>class A{
+    int x = 10;
+
+    public void display1(){
+        System.out.println("x = " + x);
+    }
+}
+
+class B extends A{
+    int y = 20;
+    public void display(){
+        System.out.println("y = " + y);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        B obj_b = new B();
+        obj_b.display();
+        obj_b.display1();
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>7. Write a java application to implement passing parameter to Applet.</p>
+                <pre>&lt;html>
+    &lt;head>
+        &lt;meta charset="UTF-8">
+        &lt;title>Title&lt;/title>
+        &lt;/head>
+    &lt;body>
+        &lt;Applet code="Main.class" width="400" height="400">
+        &lt;param name="string" value="Alex">
+        &lt;/applet>
+    &lt;/body>
+&lt;/html></pre>
+                <pre style="margin-top: 10px;">import java.awt.*;
+import java.applet.*;
+public class Main extends Applet
+{
+    String str;
+    public void init()
+    {
+        str=getParameter("string");
+        if(str==null)
+            str="java";
+        else
+            str="Hello "+str;
+    }
+    public void paint(Graphics g)
+    {
+        g.drawString(str,10,100);
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>8. Write an AWT based java application for TextArea control.</p>
+                <pre>import java.awt.*;
+import java.awt.event.*;
+class Main extends Frame
+{
+    TextArea t1,t2;
+    Button b1;
+    public Main()
+    {
+        setTitle("my window");
+        setSize(400,400);
+        setLayout(null);
+        t1=new TextArea();
+        t1.setBounds(20,50,200,150);
+        add(t1);
+        t2=new TextArea();
+        t2.setBounds(20,245,200,150);
+        add(t2);
+        b1=new Button("Copy");
+        b1.setBounds(20,210,70,25);
+        add(b1);
+        b1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                t2.setText(t1.getText());
+            }
+        });
+        this.addWindowListener (new WindowAdapter (){
+            public void windowClosing (WindowEvent we){
+                    System.exit (0);}
+            }
+        );
+
+    }
+    public static void main(String args[]){
+        Main f=new Main();
+        f.setVisible(true);
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>9. Write an AWT based java application to implement Item Event of CheckBox control.</p>
+                <pre>import java.awt.*;
+import java.awt.event.*;
+public class Main implements ItemListener
+{
+    Checkbox checkBox1,checkBox2;
+    Label label;
+    Main()
+    {
+        Frame f= new Frame("CheckBox Example");
+        label = new Label();
+        label.setAlignment(Label.CENTER);
+        label.setSize(400,100);
+        checkBox1 = new Checkbox("C++");
+        checkBox1.setBounds(100,100, 50,50);
+        checkBox2 = new Checkbox("Java");
+        checkBox2.setBounds(100,150, 50,50);
+        f.add(checkBox1);
+        f.add(checkBox2);
+        f.add(label);
+        checkBox1.addItemListener(this);
+        checkBox2.addItemListener(this);
+        f.setSize(400,400);
+        f.setLayout(null);
+        f.setVisible(true);
+    }
+    public void itemStateChanged(ItemEvent e)
+    {
+        if(e.getSource()==checkBox1)
+            label.setText("C++ Checkbox:" + (e.getStateChange()==1?"checked":"unchecked"));
+        if(e.getSource()==checkBox2)
+            label.setText("Java Checkbox: " + (e.getStateChange()==1?"checked":"unchecked"));
+    }
+    public static void main(String args[])
+    {
+        new Main();
+
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>10. Write a SWING based java application to implement Click event of Button control.</p>
+                <pre>import java.awt.event.*;
+import javax.swing.*;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        JFrame f=new JFrame("Button Example");
+        final JTextField tf=new JTextField();
+        tf.setBounds(50,50, 150,20);
+        JButton b=new JButton("Click Here");
+        b.setBounds(50,100,95,30);
+        b.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                tf.setText("Welcome ");
+            }
+        });
+        f.add(b);
+        f.add(tf);
+        f.setSize(400,400);
+        f.setLayout(null);
+        f.setVisible(true);
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>11. Write a java application to create server and client program using TCP/IP protocol.</p>
+                <pre>//Server side
+import java.net.*;
+import java.io.*;
+class Main
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            ServerSocket s1=new ServerSocket(420);
+            Socket s2=s1.accept();
+            InputStream in=s2.getInputStream();
+            int ch;
+            while((ch=in.read())!=-1)
+            {
+                System.out.print((char)ch);
+            }
+            in.close();
+            s2.close();
+            s1.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}</pre>
+                <pre style="margin-top: 10px;">//client side
+import java.net.*;
+import java.io.*;
+class Client
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            Socket s=new Socket("127.0.0.1",420);
+            OutputStream out=s.getOutputStream();
+            String str="good morning mca-msc";
+            byte b[]=str.getBytes();
+            out.write(b);
+            out.close();
+            s.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>12. Write a java application to create server and client program using Datagram.</p>
+                <pre>//server side
+import java.net.*;
+class Main
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            DatagramSocket ds=new DatagramSocket(101);
+            String str="good morning";
+            byte b[]=str.getBytes();
+            DatagramPacket dp=new DatagramPacket(b,b.length,InetAddress.getByName("localhost"),102);
+
+            ds.send(dp);
+            ds.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}</pre>
+                <pre style="margin-top: 10px;">//client side
+import java.net.*;
+class Client
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            DatagramSocket ds=new DatagramSocket(102);
+            byte b[]=new byte[100];
+            DatagramPacket dp=new DatagramPacket(b,b.length);
+            ds.receive(dp);
+            System.out.println(new String(b));
+            ds.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}</pre>
+            </div>
+            <div class="prog ">
+                <p>13. Write a java application to implement RMI program for addition of two numbers.</p>
+                <pre>//Adder interface
+import java.rmi.*;
+public interface Adder extends Remote
+{
+    public int add(int x,int y)throws RemoteException;
+}</pre>
+                <pre style="margin-top: 10px;">//Adder Implementation class
+import java.rmi.*;
+import java.rmi.server.*;
+public class AdderRemote extends UnicastRemoteObject implements Adder
+{
+    AdderRemote()throws RemoteException
+    {
+        super();
+    }
+    public int add(int x,int y)
+    {
+        return x+y;
+    }
+}</pre>
+                <pre style="margin-top: 10px;">//Server class
+import java.rmi.*;
+import java.rmi.registry.*;
+public class MyServer
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            Adder stub=new AdderRemote();
+            Naming.rebind("hello",stub);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+
+        }
+    }
+}</pre>
+                <pre style="margin-top: 10px;">//Client class
+import java.rmi.*;
+public class MyClient
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            Adder stub=(Adder)Naming.lookup("hello");
+            System.out.println(stub.add(10,20));
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}</pre>
+            </div>
+            <div class="prog">
+                <p>14. Write a java application to insert data into database using JDBC.</p>
+                <pre>import java.awt.*;
+import java.sql.*;
+import javax.swing.*;
+import java.awt.event.*;
+class Main extends JFrame implements ActionListener
+{
+
+    JLabel l1,l2,l3;
+    JTextField t1,t2,t3;
+    JButton b1,b2;
+    public Main()
+    {
+        l1=new JLabel("Enter Name: ");
+        l2=new JLabel("Enter age: ");
+        l3=new JLabel("Address: ");
+        t1=new JTextField(20);
+        t2=new JTextField(20);
+        t3=new JTextField(20);
+        b1=new JButton("Save");
+        b2=new JButton("Clear");
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        JPanel p=new JPanel(new GridLayout(4,2));
+        p.add(l1);
+        p.add(t1);
+        p.add(l2);
+        p.add(t2);
+        p.add(l3);
+        p.add(t3);
+        p.add(b1);
+        p.add(b2);
+        add(p);
+        setSize(400,400);
+        setVisible(true);
+        pack();
+
+        this.addWindowListener (new WindowAdapter ()
+            {
+                public void windowClosing (WindowEvent we)
+
+                {
+                    System.exit (0);}
+            }
+
+        );
+    }
+    public static void main(String[] args)
+    {
+        new Main();
+
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+
+        if(e.getSource()==b1)
+        {
+            String v1=t1.getText();
+            int v2=Integer.parseInt(t2.getText());
+            String v3=t3.getText();
+            try{
+                Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+                Connection con = DriverManager.getConnection("jdbc:odbc:mydsn1");
+                PreparedStatement ps=con.prepareStatement("insert into sdata values(?,?,?)");
+
+                ps.setString(1,v1);
+                ps.setInt(2,v2);
+                ps.setString(3,v3);
+
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Data is inserted successfully");
+            }
+            catch(Exception ex)
+            {
+                System.out.println(ex);
+            }
+        }
+    }
+}</pre>
+            </div>
+        </div>
+    </main>
+    <main class="php">
+        <div class="container">
+            <header>
+                <h1>Php Prog.. 1 - 6</h1> <a href="./asstes/php_practical.pdf" download title="download pdf"></a>
+            </header>
+            <div class="prog ">
+                <p>1. Write a program in PHP that perform Arithmetic operations by using different
+                    operators.</p>
+                <pre>&lt;?php
+
+    $a=100;
+    $b=20;
+
+    echo "A=100 &lt;br>";
+    echo "B=20 &lt;br>";
+
+    echo "Addition is : ",$a+$b ."&lt;br>";
+    echo "Subtraction is : ", $a-$b ."&lt;br>";
+    echo "Multiplication is : ", $a*$b."&lt;br>";
+    echo "Division is : " .$a/$b;
+?></pre>
+            </div>
+            <div class="prog ">
+                <p>2. Write a program in PHP that swap two numbers without using third variable.</p>
+                <pre>&lt;?php
+    $a=20;
+    $b=40;
+
+    echo "a :$a&lt;br>";
+    echo "b :$b&lt;br>";
+
+    $a=$a+$b;
+    $b=$a-$b;
+    $a=$a-$b;
+
+    echo "Value of a : $a &lt;br>";
+    echo "Value of b : $b &lt;br>";
+?></pre>
+            </div>
+            <div class="prog ">
+                <p>3. Write a program in PHP that show Switch Case Statement.</p>
+                <pre>&lt;?php
+    $today=date("D");
+
+    switch($today)
+    {
+        case "mon":
+            echo"today is working day";
+        break;
+        case "Tue":
+            echo"Buy some food";
+        break;
+        case "wed":
+            echo"Shopping Time";
+        break;
+        case "Thur":
+            echo "Visit to doctor";
+        break;
+        case "Fri":
+            echo"movie time";
+        break;
+        case "sat":
+            echo"meeting with friends";
+        break;
+        case "sun":
+            echo"enjoy holiday";
+        default:
+            echo"No information available";
+        break;
+    }
+?></pre>
+            </div>
+            <div class="prog ">
+                <p>4. Write a program in PHP to illustrate the various String Functions.</p>
+                <pre>&lt;?php
+    $x="Kamala Neharu College";
+    echo strlen($x);
+    echo "&lt;br>";
+    echo strrev($x);
+    echo "&lt;br>";
+    echo strpos($x,"Neharu");
+    echo "&lt;br>";
+    echo str_word_count($x);
+    echo "&lt;br>";
+    echo str_replace("Kamala","Gamala",$x);
+?></pre>
+            </div>
+            <div class="prog ">
+                <p>5. Write a program in PHP to interchange the value of the variables using scope variable.</p>
+                <pre>&lt;?php
+    function swap($i,$j)
+    {
+        $t=$i;
+        $i=$j;
+        $j=$t;
+    }
+    $i=10;
+    $j=20;
+    echo ("Before pass by value to the swap Fuction i = ".$i." and j = ".$j);
+    echo "&lt;br>";
+    swap($i,$j);
+    echo "After Pass by value to the swap Function i = ".$i."and j = ".$j; 
+?></pre>
+            </div>
+            <div class="prog ">
+                <p>6. Write a program in PHP to perform addition of two numbers using Function returning Value.</p>
+                <pre>&lt;?php
+    function AddFunction($num1,$num2)
+    {
+        $sum=$num1+$num2;
+        return $sum;
+    }
+    $return_value=AddFunction(30,40);
+    echo "Returned value from function $return_value";
+?></pre>
+            </div>
+        </div>
+    </main>
+    <main class="adbms">
+        <div class="container">
+            <header>
+                <h1>Adbms Prog.. 1 - 20</h1> <a href="./asstes/adbms_practical.pdf" download title="download pdf"></a>
+            </header>
+            <div class="prog ">
+                <p>1.Create a new database in oracle using “Database Configration Assistant</p>
+                <pre>Step 1: start
+Step 2: All Programs
+Step 3: oracle_oracle 10g
+Step 4: configuration and migration tools
+Step 5: database configuration assistant</pre>
+                <pre style="margin-top: 10px;"><img src="./asstes/1.png" alt="one"></pre>
+                <pre style="margin-top: 10px;"><img src="./asstes/2.png" alt="two"></pre>
+                <pre style="margin-top: 10px;"><img src="./asstes/3.png" alt="three"></pre>
+            </div>
+            <div class="prog ">
+                <p>2. Create a new user & grant privileges of creating table,sequence& view to this new user</p>
+                <pre>SQL> create user xyz identified by abc;
+User created.
+SQL> grant create table,createsequence,create view to xyz;
+Grant succeeded.</pre>
+            </div>
+            <div class="prog ">
+                <p>3. Create a new role named manager for with same privileges. Grant this role new user. Then change
+                    the password of newly created user.</p>
+                <pre>SQL> create role manager;
+Role created.
+SQL> grant create table,create view to manager;
+Grant succeeded.
+SQL> grant manager to xyz;
+Grant succeeded.
+SQL> alter user xyz identified by pass;
+User altered.</pre>
+            </div>
+            <div class="prog ">
+                <p>4. Revoke the role manager from new created. Then delete that user.</p>
+                <pre>SQL> revoke manager from xyz;
+Revoke succeeded.
+SQL> drop user xyz;
+User dropped.
+Managing Tablespaces
+Viewing Information about Tablespaces
+To view information about Tablespaces in a database give the following query
+SQL> select * from dba_tablespaces
+SQL> select * from v$tablespace;
+SQL> select tablespace_name from dba_tablespaces;
+SQL> select table_name from dba_tables where tablespace_name = 'USERS'</pre>
+            </div>
+            <div class="prog ">
+                <p>5. Create a tablespace named “dba_tablespace” with file name “dba_tablespace_datafile.dbf” having
+                    size of 10mb.</p>
+                <pre>SQL> create tablespace dba_tablespace
+2 datafile 'C:\program files(x86)\oracle\dba_tablespace_datafile.dbf'
+3* size 10m
+4 ;
+Tablespace created.</pre>
+            </div>
+            <div class="prog ">
+                <p>6. Create a tablespace named “ts_mydemo” with two datafile named “ts_mydemo01.dbf” & “ts_mydemo02.dbf
+                    “ having size of 50mb and 64mb respectively . Make the tablespaceautoextendable and limit
+                    autoextending to size of 2048mb.In autoextending ,next extend should of 32mb.</p>
+                <pre>SQL> create tablespacets_mydemo
+2 datafile 'c:/program files/oracle/ts_mydemo01.dbf'size 50m,
+3 'c:/program files/oracle/ts_mydemo02.dbf' size 64m
+4 autoextend on next 32m maxsize 2048m;
+Tablespace created</pre>
+            </div>
+            <div class="prog ">
+                <p>7. Alter the last datafile “ts_mydemo01.dbf” so that its size will automatically extend by 5mb& limit
+                    its size to 500mb.</p>
+                <pre>SQL> alter database datafile 'c:/program files/oracle/ts_mydemo01.dbf' autoextend on
+2 next 5m
+3 maxsize 500m;
+Database altered.</pre>
+            </div>
+            <div class="prog ">
+                <p>8. Create temporary table space with size of 5mb which will be automatically increase on demand</p>
+                <pre>SQL> create temporary tablespacetemp_demo
+2 tempfile 'temp01.dbf' size 5m autoextend on;
+Tablespace created.</pre>
+            </div>
+            <div class="prog ">
+                <p>9. Create any locally managed tablespace with own specification.</p>
+                <pre>SQL> create tablespacetbs_localdatafile 'filef.f' size 10m
+2 extent management local uniform size 128k;
+Tablespace created.</pre>
+            </div>
+            <div class="prog ">
+                <p>10. Add new Redo log file of size 10mb to existing database.</p>
+                <pre>SQL> alter database add logfile 'c:/program files/oracle/log5.ora' size 10m;
+Database altered.</pre>
+            </div>
+            <div class="prog ">
+                <p>11.Display the list of all Redo log files.</p>
+                <pre>SQL> select *from v$logfile;</pre>
+            </div>
+            <div class="prog ">
+                <p>12. Display the list,datafiles,tablespace names & size in MB.</p>
+                <pre>SQL> clear breaks;
+breaks cleared
+SQL> set linesize 130
+SQL> set pagesize 60
+SQL> break on tablespace_name skip 1
+SQL> col tablespace_name format a15
+SQL> col file_name format a50
+SQL> col tablespace_kb heading 'TABLESPACE|TOTAL_KB'
+SQL> col kbytes_free heading 'TOTAL FREE|KBYTES'
+SQL> select file_name,tablespace_name, ROUND(bytes/1024000) mb
+2 fromdba_data_files order by 1;</pre>
+            </div>
+            <div class="prog ">
+                <p>13. Create rollback segment in separate tablespace with proper storage option.</p>
+                <pre>1 createtablespacesmall_rollbacks
+2 datafile 'c:program files/oracle/small_rollbacks.dbf' size 20m reuse
+3* default storage(initial 250k next 250k maxextents 20)
+SQL> /
+Tablespace created.
+SQL> alter session set undo_suppress_errors=true;
+Session altered.
+SQL> create rollback segment small_rollbacks
+2 tablespacesmall_rollbacks
+3 storage(initial 250k next 250k maxextents 20);
+Rollback segment created</pre>
+            </div>
+            <div class="prog ">
+                <p>14. Create a 3 new abstract datatype as given below <br>
+                    1. NAME_TYPE(F_NAME,M_NAME,L_NAME) <br>
+                    2. POST_TYPE(MAIN,SFX) <br>
+                    3. ADDR_TYPE(STREET,CITY,STATE,POSTCODE)</p>
+                <pre>SQL> create type name_type as object(f_namevarchar(15),
+2 m_init char(1),
+3 l_namevarchar2(20));
+4 /
+Type created.
+SQL> create type post_type as object(main integer,sfx integer);
+2 /
+Type created.
+SQL> create type add_type as object(
+2 street varchar2(35),
+3 cityvarchar(15),state char(2),postcode post_type);
+4 /
+Type created.
+</pre>
+            </div>
+            <div class="prog ">
+                <p>15. Use the above created abstract typr in newly created table engineers. Also insert values in it.
+                </p>
+                <pre>SQL> create table engineers(emp_numinteger,namename_type,addressadd_type);
+Table created.
+SQL> insert into engineers values(12,name_type('yogita','B','kaushal'),
+2 add_type('hiwarinager','nagpur','mh',
+3 post_type(4400,08)));
+1 row created.
+SQL> select * from engineers;</pre>
+            </div>
+            <div class="prog ">
+                <p>16. Create a varying array name medicine_arr and use this in table medicine_arr. Perform dml
+                    operation on this table.</p>
+                <pre>SQL> create type medicines as object(med_id number(6),
+2 med_name varchar2(14),
+3 manf_date date);
+4 /
+Type created.
+SQL> create type medicine_arr1 as varray(40) of medicines;
+2 /
+Type created.</pre>
+            </div>
+            <div class="prog ">
+                <p>17. Create a table studinfo having column name,rollno,phy,maths,comp,total and percentage. Write a
+                    trigger to autometicallycalculate students total marks and percentage of students while insertion.
+                </p>
+                <pre>SQL> create table studinfo(
+2 name varchar2(20),
+3 rollno number(3),
+4 phy number(3),
+5 math number(3),
+6 comp number(3),
+7 total number(5),
+8 per number(3,2));
+Table created.
+SQL> create or replace trigger totper
+2 before insert on studinfo
+3 for each row
+4 begin
+5 :new.total:=:new.math+:new.phy+:new.comp;
+6 :new.per:=(:new.total/300)*100;
+7 endtotper;
+8 /
+Trigger created.
+SQL>insert into studinfo(name,rollno,phy,math,comp)
+2 values('sid',1,7,7,7)
+3 /
+1 row created.
+SQL> select * from studinfo;</pre>
+            </div>
+            <div class="prog ">
+                <p>18. Write a PLSQL block using cursor to transfer names and sal of employee from emp tables where
+                    sal>-2500 in table ‘try1’.</p>
+                <pre>SQL> declare cursor cf is
+2 selectename,sal from emp
+3 wheresal>=2500;
+4 Mcf%rowtype;
+5 N number;
+6 begin open cf;
+7 N:=0;
+8 loop fetch cf into M;
+9 exit when cf%notfound;
+10 N:=cf%rowcount;
+11 insert into try1
+12 values(N,M.ename,M.sal);
+13 end loop;
+14 closecf;
+15 end;
+SQL> /
+PL/SQL procedure successfully completed.
+SQL> select * from try1;</pre>
+            </div>
+            <div class="prog ">
+                <p>19. Write a SQL query to display the following data information . <br>(1)Name of
+                    database<br>(2)Database startup time<br>(3)Database size information(database size,used space, free
+                    Space)</p>
+                <pre>SQL> select name from v$database;
+SQL> select to_char(startup_time,'hh24:mi dd-mm-yy')"startup time"
+2 fromv$instance;
+1 select round(sum(used.bytes)/1024/1024/1024)|| 'gb' "database size",
+2 round(sum(used.bytes)/1024/1024) || 'mb' "used space",
+3 round(free.p/1024/1024) || 'mb' "free space"
+4 from(select bytes
+5 fromv$datafile
+6 union all
+7 select bytes
+8 from v$tempfile
+9 union all
+10 select bytes
+11 fromv$log) used,
+12 (select sum(bytes)as p
+13 fromdba_free_space)free
+14* group by free.p
+SQL> /</pre>
+            </div>
+            <div class="prog ">
+                <p>20. Take backup of EMP and DEPT table at a time and restore it to different user or machine.</p>
+                <pre><img src="./asstes/4.png" alt="four"></pre>
+            </div>
+        </div>
+    </main>
+    <nav>
+        <button class="javabtn active">JAVA</button>
+        <button class="phpbtn" style="margin: 0 10px;">PHP</button>
+        <button class="adbmsbtn">ADBMS</button>
+    </nav>
+    <p class="copyright">&copy;Avinash_Thakare_2023</p>
+</body>
+
+</html>
