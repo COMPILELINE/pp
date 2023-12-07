@@ -138,6 +138,8 @@ nav button.active,
 .container .prog p {
     margin-bottom: 10px;
     font-size: large;
+    text-wrap: wrap;
+    word-wrap: break-word;
 }
 
 pre::-webkit-scrollbar {
